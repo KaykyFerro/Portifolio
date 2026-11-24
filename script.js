@@ -101,3 +101,11 @@ if (themeToggle) {
 systemTheme.addEventListener('change', event => {
   if (!localStorage.getItem('theme')) applyTheme(event.matches ? 'light' : 'dark');
 });
+
+
+// Reveal elements as they enter the viewport, respecting reduced-motion preferences.
+const revealElements=document.querySelectorAll('.reveal');
+if('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+ const revealObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('revealed');revealObserver.unobserve(entry.target)}}),{threshold:.12,rootMargin:'0px 0px -35px 0px'});
+ revealElements.forEach(el=>revealObserver.observe(el));
+}else revealElements.forEach(el=>el.classList.add('revealed'));
