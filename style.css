@@ -63,3 +63,6 @@ html.theme-light footer{color:#656d83}
 
 /* Education course completion labels */
 .education-status.completed{display:inline-flex;align-items:center;gap:7px;color:#22c55e!important}.education-status.completed::before{content:"";width:7px;height:7px;border-radius:50%;background:#22c55e;box-shadow:0 0 9px #22c55e66}.education-card{transition:transform .3s ease,border-color .3s ease}.education-card:hover{transform:translateY(-4px);border-color:var(--accent)}
+
+/* MORFY and DECKRA brand marks in project previews */
+.brand-logo-panel{display:flex;flex-direction:column;gap:2px;align-items:flex-start;position:relative;z-index:1}.brand-logo-panel span{font-size:8px;letter-spacing:3px;font-weight:800;opacity:.68}.project-brand-logo{width:min(270px,82%);height:auto;max-height:64px;filter:drop-shadow(0 4px 12px #0003)}.morfy-brand{margin-bottom:10px}.deckra-brand{margin-bottom:12px}.project-visual .visual-title{margin-top:10px}
