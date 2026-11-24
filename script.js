@@ -109,3 +109,10 @@ if('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-moti
  const revealObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('revealed');revealObserver.unobserve(entry.target)}}),{threshold:.12,rootMargin:'0px 0px -35px 0px'});
  revealElements.forEach(el=>revealObserver.observe(el));
 }else revealElements.forEach(el=>el.classList.add('revealed'));
+
+// Accessible mobile navigation and scroll-aware active section.
+const menuToggle=document.getElementById('menu-toggle');
+const navHeader=document.querySelector('.nav');
+if(menuToggle&&navHeader){menuToggle.addEventListener('click',()=>{const open=navHeader.classList.toggle('menu-open');menuToggle.setAttribute('aria-expanded',String(open));menuToggle.setAttribute('aria-label',open?'Fechar menu':'Abrir menu');menuToggle.textContent=open?'✕':'☰'});document.querySelectorAll('.nav nav a').forEach(a=>a.addEventListener('click',()=>{navHeader.classList.remove('menu-open');menuToggle.setAttribute('aria-expanded','false');menuToggle.textContent='☰'}));}
+const sectionTargets=[...document.querySelectorAll('main section[id]')];
+if('IntersectionObserver' in window){const navObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){document.querySelectorAll('.nav nav a').forEach(a=>{if(a.getAttribute('href')==='#'+entry.target.id)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')})}}),{rootMargin:'-35% 0px -55% 0px'});sectionTargets.forEach(s=>navObserver.observe(s));}
